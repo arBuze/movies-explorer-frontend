@@ -1,3 +1,4 @@
+import './Main.css';
 import AboutMe from "../AboutMe/AboutMe";
 import AboutProject from "../AboutProject/AboutProject";
 import Promo from "../Promo/Promo";
