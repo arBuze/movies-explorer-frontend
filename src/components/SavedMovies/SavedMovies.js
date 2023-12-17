@@ -1,9 +1,8 @@
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-import './Movies.css';
 import { cards } from '../../utils/constants';
 
-export default function Movies(props) {
+export default function SavedMovies(props) {
   return(
     <>
       <SearchForm />

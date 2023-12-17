@@ -14,7 +14,7 @@ export default function AboutMe() {
           Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
 С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="about-me__github-link" href="https://github.com/arBuze" target="_blank">Github</a>
+          <a className="about-me__github-link" href="https://github.com/arBuze" target="_blank" rel="noopener noreferrer">Github</a>
         </div>
         <img className="about-me__photo" src={studentPhoto} alt="Student" />
       </div>

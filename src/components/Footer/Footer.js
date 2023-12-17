@@ -1,7 +1,11 @@
 import './Footer.css';
+import { useLocation } from 'react-router-dom';
+import { renderPaths } from '../../utils/constants';
 
 export default function Footer() {
-  return(
+  const location = useLocation();
+
+  return renderPaths.slice(0, 3).includes(location.pathname) && (
     <footer className="footer">
       <div className="footer__container">
         <p className="footer__description">Учебный проект Яндекс.Практикум х BeatFilm.</p>

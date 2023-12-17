@@ -1,0 +1,37 @@
+.page-not-found {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.page-not-found__title {
+  font-size: 140px;
+  line-height: 169px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.page-not-found__description {
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin: 5px 0 184px;
+}
+
+.page-not-found__return-btn {
+  font-size: 14px;
+  line-height: 17px;
+  color: #FF6838;
+  background-color: #FFF;
+  border: none;
+  padding: 0;
+  transition: opacity .2s ease-in;
+}
+
+.page-not-found__return-btn {
+  cursor: pointer;
+  opacity: .7;
+}

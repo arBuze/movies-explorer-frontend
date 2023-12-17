@@ -6,11 +6,11 @@ import Techs from "../Techs/Techs";
 
 export default function Main(props) {
   return(
-    <main className="main">
+    <>
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
-    </main>
+    </>
   );
 }

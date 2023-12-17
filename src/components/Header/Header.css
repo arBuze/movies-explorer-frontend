@@ -1,35 +1,26 @@
 .header {
-  background-color: #465DFF;
-  color: #FFF;
-}
-
-.header_type_white {
   background-color: #FFF;
   color: #000;
 }
 
-.header__navigation {
+.header_type_blue {
+  background-color: #465DFF;
+  color: #FFF;
+}
+
+.header__container {
   max-width: 1280px;
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
-  padding: 18px 70px;
+  padding: 0 70px;
   margin: 0 auto;
 }
 
-.header__navigation-items {
-  list-style: none;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-}
-
-.header__navigation-item {
+.header__logo-link {
   margin-right: 45px;
-}
-
-.header__navigation-item:last-child {
-  margin: 0 0 0 auto;
 }
 
 .header__logo-img {
@@ -44,75 +35,36 @@
   opacity: .8;
 }
 
-.header__nav-link {
-  font-size: 13px;
-  line-height: 18px;
-  color: inherit;
-  text-decoration: none;
-  font-weight: 400;
-  margin-right: 16px;
+.header__menu-btn {
+  display: block;
+  min-width: 44px;
+  height: 44px;
+  font-size: 0;
+  border: none;
+  background-color: inherit;
+  background: url(../../images/menu-icon.svg) no-repeat center;
+  padding: 0;
   transition: opacity .2s ease-in;
 }
 
-.header__nav-link:hover {
-  opacity: .7;
-}
-
-.header__nav-link_active {
-  font-weight: 500;
-}
-
-.header__profile-link {
-  display: inline-flex;
-  align-items: center;
-  color: inherit;
-  text-decoration: none;
-  gap: 17px;
-}
-
-.header__profile-name {
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 500;
-  color: inherit;
-  vertical-align: middle;
-  transition: opacity .2s ease-in;
-}
-
-.header__profile-link:hover .header__profile-name{
+.header__menu-btn:hover {
+  cursor: pointer;
   opacity: .8;
 }
 
-.header__profile-icon {
-  width: 26px;
-  height: 30px;
-  object-fit: cover;
-  object-position: center;
+@media (min-width: 768px) {
+  .header__container {
+    padding: 0 30px;
+  }
 }
 
-.header__menu-btn {
-  display: none;
-  border: none;
-  background-color: inherit;
+@media (min-width: 1024px) {
+  /* .header__container {
+    padding: 0 70px;
+  } */
+  .header__menu-btn {
+    display: none;
+  }
 }
 
-.header__auth-link {
-  display: inline-block;
-  font-size: 12px;
-  line-height: 16px;
-  color: inherit;
-  text-decoration: none;
-  padding: 8px 20px;
-  transition: opacity .2s ease-in;
-}
 
-.header__auth-link:hover {
-  opacity: .7;
-}
-
-.header__auth-link:last-child {
-  color: #000;
-  background-color: #2BE080;
-  border-radius: 3px;
-  margin-left: 10px;
-}
