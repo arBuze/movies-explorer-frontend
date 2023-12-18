@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 70px;
+  padding: 0 14px;
   margin: 0 auto;
 }
 
@@ -37,9 +37,8 @@
 
 .header__menu-btn {
   display: block;
-  min-width: 44px;
-  height: 44px;
-  font-size: 0;
+  min-width: 40px;
+  height: 43px;
   border: none;
   background-color: inherit;
   background: url(../../images/menu-icon.svg) no-repeat center;
@@ -56,15 +55,17 @@
   .header__container {
     padding: 0 30px;
   }
+  .header__menu-btn {
+    min-width: 44px;
+    height: 44px;
+  }
 }
 
 @media (min-width: 1024px) {
-  /* .header__container {
+  .header__container {
     padding: 0 70px;
-  } */
+  }
   .header__menu-btn {
     display: none;
   }
 }
-
-

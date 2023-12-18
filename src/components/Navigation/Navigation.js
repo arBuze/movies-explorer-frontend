@@ -19,7 +19,7 @@ export default function Navigation(props) {
               </li>
               <li className="navigation__item">
                 <NavLink to="/saved-movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`} >
-                  Сохраненные фильмы
+                  Сохранённые фильмы
                 </NavLink>
               </li>
               <li className="navigation__item">

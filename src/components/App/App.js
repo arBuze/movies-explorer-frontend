@@ -11,9 +11,10 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import MenuPopup from '../MenuPopup/MenuPopup';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
 
   function handleMenuPopupOpen() {
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <div className="page">
+
       <Header isLoggedIn={isLoggedIn} onMenuButtonClick={handleMenuPopupOpen} />
       <main className="content">
         <Routes>
@@ -39,7 +41,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-      <MenuPopup isOpen={isMenuPopupOpen} onMenuClose={closeAllPopups} />
+      <MenuPopup isOpen={isMenuPopupOpen} onClose={closeAllPopups} />
     </div>
   );
 }
