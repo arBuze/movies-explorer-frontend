@@ -15,7 +15,7 @@ export default function Header(props) {
         </Link>
         <Navigation isLoggedIn={props.isLoggedIn}/>
         {
-          props.isLoggedIn && <button className="header__menu-btn" />
+          props.isLoggedIn && <button className="header__menu-btn" onClick={props.onMenuButtonClick} />
         }
       </div>
     </header>

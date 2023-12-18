@@ -10,14 +10,23 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import MenuPopup from '../MenuPopup/MenuPopup';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
 
+  function handleMenuPopupOpen() {
+    setIsMenuPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsMenuPopupOpen(false);
+  }
+
   return (
     <div className="page">
-      <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} onMenuButtonClick={handleMenuPopupOpen} />
       <main className="content">
         <Routes>
           <Route path="/" element={<Main />} />
@@ -30,6 +39,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <MenuPopup isOpen={isMenuPopupOpen} onMenuClose={closeAllPopups} />
     </div>
   );
 }

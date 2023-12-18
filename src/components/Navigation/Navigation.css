@@ -1,5 +1,5 @@
 .navigation {
-  display: none;
+  display: block;
   width: 100%;
 }
 
@@ -99,8 +99,20 @@
   display: flex;
 }
 
+@media (min-width: 768px) {
+  .navigation {
+    display: block;
+  }
+  /* .navigation__item {
+    visibility: hidden;
+  } */
+}
+
 @media (min-width: 1024px) {
   .navigation {
     display: block;
   }
+  /* .navigation__item {
+    display: block;
+  } */
 }
