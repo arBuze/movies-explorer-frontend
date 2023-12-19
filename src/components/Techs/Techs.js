@@ -1,8 +1,11 @@
 import './Techs.css';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 export default function Techs() {
+  const { width } = useWindowDimensions();
+
   return(
-    <section className="techs">
+    <section className={`techs ${width < 768 ? "techs_type_light" : ""}`}>
       <div className="techs__container">
         <h2 className="techs__title">Технологии</h2>
         <h3 className="techs__subtitle">7 технологий</h3>

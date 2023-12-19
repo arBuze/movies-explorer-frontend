@@ -105,6 +105,6 @@
   border-radius: 4px;
 }
 
-.popup__profile-link.popup__profile-link_active .popup__profile-name {
-  border-bottom: 1px solid #000;
+.popup__profile-link.popup__profile-link_active .popup__profile-icon {
+  background-color: #2BE080;
 }

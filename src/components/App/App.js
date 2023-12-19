@@ -14,7 +14,7 @@ import MenuPopup from '../MenuPopup/MenuPopup';
 import Preloader from '../Preloader/Preloader';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
 
   function handleMenuPopupOpen() {

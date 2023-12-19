@@ -62,10 +62,13 @@
 }
 
 @media (min-width: 1024px) {
-  .header__container {
-    padding: 0 70px;
-  }
   .header__menu-btn {
     display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header__container {
+    padding: 0 70px;
   }
 }

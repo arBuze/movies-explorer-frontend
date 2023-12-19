@@ -2,6 +2,10 @@
   background-color: #F5F5F5;
 }
 
+.techs_type_light {
+  background-color: #FFF;
+}
+
 .techs__container {
   max-width: 1280px;
   display: flex;
@@ -52,7 +56,8 @@
   justify-content: center;
   gap: 10px;
   list-style: none;
-  padding: 0;
+  box-sizing: border-box;
+  padding: 0 20px;
   margin: 0;
 }
 
@@ -89,13 +94,10 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .techs__container {
     padding: 100px 70px;
   }
-}
-
-@media (min-width: 1280px) {
   .techs__subtitle {
     margin: 90px 0 26px ;
   }
