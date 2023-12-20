@@ -1,16 +1,21 @@
 .movies {
   max-width: 1280px;
-  min-height: 51vh;
+  min-height: 43vh;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
-  padding: 70px 70px 80px;
+  justify-content: space-between;
+  padding: 40px 10px 80px;
   margin: 0 auto;
 }
 
 .movies__not-found {
-  height: 100%;
+  font-size: 16px;
+  line-height: 18px;
   text-align: center;
   font-weight: 500;
   color: #A0A0A0;
+  margin: calc(10% - 10px) 0 0;
 }
 
 .movies__list {
@@ -44,7 +49,7 @@
 
 @media (min-width: 768px) {
   .movies {
-    min-height: 51vh;
+    min-height: 50vh;
     padding: 70px 30px 80px;
   }
   .movies__list {

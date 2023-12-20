@@ -1,7 +1,7 @@
 .filter-checkbox__switch-label {
   display: flex;
   position: relative;
-  font-size: 14px;
+  font-size: 11px;
   line-height: 18px;
 }
 
@@ -39,11 +39,17 @@
   transition: left .2s ease-in;
 }
 
-.filter-checkbox__switch:checked + .search-form__pseudo-switch {
+.filter-checkbox__switch:checked + .filter-checkbox__pseudo-switch {
   background-color: #2BE080;
 }
 
-.filter-checkbox__switch:checked + .search-form__pseudo-switch::before {
+.filter-checkbox__switch:checked + .filter-checkbox__pseudo-switch::before {
   background-color: #FFF;
   left: calc(100% - 14px);
+}
+
+@media (min-width: 768px) {
+  .filter-checkbox__switch-label {
+    font-size: 14px;
+  }
 }

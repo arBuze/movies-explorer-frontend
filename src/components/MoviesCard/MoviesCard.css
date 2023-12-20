@@ -35,7 +35,16 @@
   transition: opacity .2s ease-in;
 }
 
-.movies__save-btn:hover {
+.movies__delete-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #F9F9F9 url(../../images/delete-btn.svg) no-repeat center;
+  border: none;
+  transition: opacity .2s ease-in;
+}
+
+.movies__save-btn:hover, .movies__delete-btn:hover {
   cursor: pointer;
   opacity: .8;
 }
@@ -46,7 +55,7 @@
 
 .movies__film-image {
   width: 100%;
-  height: 203px;
+  height: 168px;
   object-fit: cover;
   object-position: center;
 }

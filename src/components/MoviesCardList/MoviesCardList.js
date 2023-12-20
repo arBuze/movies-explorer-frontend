@@ -17,7 +17,7 @@ export default function MoviesCardList(props) {
         :
         <ul className="movies__list">
           {props.cards.slice(0, cardsVisible).map((data) => {
-            return(<MoviesCard key={data._id} card={data} />)
+            return(<MoviesCard key={data.id} card={data} />)
           })}
         </ul>
       }
