@@ -13,9 +13,9 @@ export default function MenuPopup(props) {
   },[width])
 
   return(
-    <div className={`popup ${props.isOpen ? "popup_opened" : ""}`}>
-      <div className={`popup__container ${props.isOpen ? "popup__container_visible" : ""}`}>
-        <button className="popup__close-btn" type="button" onClick={props.onClose} />
+    <div className={`popup popup_type_menu ${props.isOpen ? "popup_opened" : ""}`}>
+      <div className={`popup__container popup__container_type_menu ${props.isOpen ? "popup__container_visible" : ""}`}>
+        <button className="popup__close-btn popup__close-btn_type_menu" type="button" onClick={props.onClose} />
         <nav className="popup__menu">
           <ul className="popup__menu-links">
             <div className="popup__links-container">

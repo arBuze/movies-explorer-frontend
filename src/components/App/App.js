@@ -12,10 +12,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import MenuPopup from '../MenuPopup/MenuPopup';
 import Preloader from '../Preloader/Preloader';
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(true);
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
   function handleMenuPopupOpen() {
     setIsMenuPopupOpen(true);
@@ -23,11 +26,11 @@ function App() {
 
   function closeAllPopups() {
     setIsMenuPopupOpen(false);
+    setIsInfoToolTipOpen(false);
   }
 
   return (
     <div className="page">
-
       <Header isLoggedIn={isLoggedIn} onMenuButtonClick={handleMenuPopupOpen} />
       <main className="content">
         <Routes>
@@ -42,6 +45,7 @@ function App() {
       </main>
       <Footer />
       <MenuPopup isOpen={isMenuPopupOpen} onClose={closeAllPopups} />
+      <InfoToolTip isOpen={isInfoToolTipOpen} isSuccessful={isSuccessful} onClose={closeAllPopups} />
     </div>
   );
 }
