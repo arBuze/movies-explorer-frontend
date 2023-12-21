@@ -40,8 +40,8 @@
 
 .popup__close-btn {
   position: absolute;
-  top: 29px;
-  right: 29px;
+  top: 20px;
+  right: 20px;
   width: 22px;
   height: 22px;
   background: url(../../images/close-btn.svg) no-repeat center/cover;
@@ -68,7 +68,7 @@
 
 .popup__menu-item {
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 15px;
 }
 
 .popup__menu-link {
@@ -108,3 +108,20 @@
 .popup__profile-link.popup__profile-link_active .popup__profile-icon {
   background-color: #2BE080;
 }
+
+@media (min-width: 768px) {
+  .popup__container {
+    padding: 144px 0 48px;
+  }
+  .popup__close-btn {
+    top: 29px;
+    right: 29px;
+  }
+  .popup__menu-item {
+    margin-bottom: 22px;
+  }
+  .popup__menu-link {
+    padding-bottom: 7px;
+  }
+}
+

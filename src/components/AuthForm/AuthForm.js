@@ -12,9 +12,9 @@ export default function AuthForm(props) {
         <span className="auth-form__input-error email-input-error"></span>
         <label className="auth-form__item">
           Пароль
-          <input className="auth-form__input-item" type="password" name="password" id="password-input" required />
+          <input className="auth-form__input-item error" type="password" name="password" id="password-input" required />
         </label>
-        <span className="auth-form__input-error password-input-error"></span>
+        <span className="auth-form__input-error password-input-error">Что-то пошло не так...</span>
       </div>
       <button className="auth-form__submit-btn" type="submit">{props.buttonTitle}</button>
     </form>

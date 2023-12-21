@@ -10,17 +10,21 @@ export default function Profile(props) {
   }
 
   function handleChange(e) {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormValue({
       ...formValue,
       [name]: value
     });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return(
     <>
       <section className="profile">
-        <form className="profile__form" name="profile" method="patch" noValidate>
+        <form className="profile__form" name="profile" method="patch" noValidate onSubmit={handleSubmit}>
           <div className="profile__user-data">
           <h2 className="profile__greeting">Привет, Анна!</h2>
             <label className="profile__label">

@@ -1,7 +1,16 @@
 import './MenuPopup.css';
 import { NavLink } from 'react-router-dom';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { useEffect } from 'react';
 
 export default function MenuPopup(props) {
+  const { width } = useWindowDimensions();
+
+  useEffect(() => {
+    if (width >= 1024 && props.isOpen) {
+      props.onClose();
+    }
+  },[width])
 
   return(
     <div className={`popup ${props.isOpen ? "popup_opened" : ""}`}>
