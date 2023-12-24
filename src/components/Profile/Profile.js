@@ -24,7 +24,7 @@ export default function Profile(props) {
   return(
     <>
       <section className="profile">
-        <form className="profile__form" name="profile" method="patch" noValidate onSubmit={handleSubmit}>
+        <form className="profile__form" name="profile" method="patch" onSubmit={handleSubmit}>
           <div className="profile__user-data">
           <h2 className="profile__greeting">Привет, Анна!</h2>
             <label className="profile__label">
@@ -43,7 +43,7 @@ export default function Profile(props) {
               isEdit ?
               <>
                 <span className="profile__form-error">Вы ввели неправильный логин или пароль</span>
-                <button className="profile__save-btn" type="submit">Сохранить</button>
+                <button className="profile__save-btn" type="submit" disabled={false}>Сохранить</button>
               </>
               :
               <>

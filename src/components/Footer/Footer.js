@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="footer__container">
         <p className="footer__description">Учебный проект Яндекс.Практикум х BeatFilm.</p>
         <div className="footer__copyright">
-          <p className={`footer__year ${width < 768 ? "footer__year_type_light" : ""}`}>&copy; 2023</p>
+          <p className={`footer__year ${width < 768 ? "footer__year_type_light" : ""}`}>&copy;2023</p>
           <ul className="footer__organizations">
             <li className="footer__organization">Яндекс.Практикум</li>
             <li className="footer__organization">Github</li>

@@ -1,15 +1,13 @@
 import './Register.css';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo.svg';
 import AuthForm from '../AuthForm/AuthForm';
+import LogoLink from '../LogoLink/LogoLink';
 
 export default function Register(props) {
   return(
     <section className="register">
       <div className="register__container">
-        <Link to="/" className="register__logo-link">
-          <img className="register__logo-img" src={logo} alt="Логотип" />
-        </Link>
+        <LogoLink />
         <h2 className="register__title">Добро пожаловать!</h2>
         <AuthForm buttonTitle="Зарегистрироваться">
           <label className="auth-form__item">

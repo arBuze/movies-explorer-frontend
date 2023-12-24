@@ -2,7 +2,7 @@ import './Navigation.css';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-export default function Navigation(props) {
+export default function Navigation({ isLoggedIn }) {
   const location = useLocation();
   const { width } = useWindowDimensions();
 
@@ -10,7 +10,7 @@ export default function Navigation(props) {
     <nav className="navigation">
         <ul className="navigation__links">
           {
-            props.isLoggedIn ? width >= 1024 &&
+            isLoggedIn ? width >= 1024 &&
             <>
               <li className="navigation__item">
                 <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`} >
@@ -30,7 +30,7 @@ export default function Navigation(props) {
               </li>
             </>
             :
-            (!props.isLoggedIn) &&
+            (!isLoggedIn) &&
             <>
               <li className="navigation__auth-item">
                 <Link to="/signup" className="navigation__auth-link">Регистрация</Link>

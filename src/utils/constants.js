@@ -3,7 +3,7 @@ export const renderPaths = ['/', '/movies', '/saved-movies', '/profile'];
 export const cards = [
   {
     id: 1,
-    nameRU: '33 слова о дизайне',
+    nameRU: '33 слова о дизайне 33 слова о дизайне 33 слова о дизайне 33 слова о дизайне 33 слова о дизайне',
     duration: '1ч 47м',
     image: 'https://images.unsplash.com/photo-1603126004251-d01882b9bfd3'
   },
@@ -63,7 +63,7 @@ export const cards = [
   },
   {
     id: 11,
-    nameRU: '33 слова о дизайне',
+    nameRU: '33 слова о дизайне 33 слова о дизайне 33 слова о дизайне 33 слова о дизайне 33 слова о дизайне',
     duration: '1ч 47м',
     image: 'https://images.unsplash.com/photo-1603126004251-d01882b9bfd3'
   },

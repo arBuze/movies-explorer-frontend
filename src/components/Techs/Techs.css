@@ -21,7 +21,7 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  letter-spacing: -1px;
+  letter-spacing: -0.9px;
   border-bottom: 1px solid #000;
   padding: 0 0 28px;
   margin: 0;
@@ -31,7 +31,7 @@
   font-size: 30px;
   line-height: 36px;
   font-weight: 400;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
   margin: 60px 0 24px ;
 }
 
@@ -39,7 +39,7 @@
   max-width: 292px;
   font-size: 11px;
   line-height: 16px;
-  letter-spacing: -1px;
+  letter-spacing: -0.6px;
   text-align: center;
   margin: 0 0 50px;
 }
@@ -57,7 +57,7 @@
   gap: 10px;
   list-style: none;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 10px;
   margin: 0;
 }
 
@@ -67,7 +67,7 @@
   align-items: center;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -1px;
+  letter-spacing: -0.8px;
   background-color: #E8E8E8;
   border-radius: 10px;
 }
@@ -87,7 +87,7 @@
     margin: 80px 0 22px ;
   }
   .techs__paragraph {
-    max-width: 460px;
+    max-width: 440px;
     font-size: 12px;
     line-height: 18px;
     margin: 0 0 83px;
@@ -102,6 +102,7 @@
     margin: 90px 0 26px ;
   }
   .techs__paragraph {
+    max-width: 460px;
     font-size: 14px;
     line-height: 20px;
     margin: 0 0 100px;

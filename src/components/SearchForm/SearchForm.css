@@ -21,13 +21,12 @@
   height: 34px;
   object-fit: cover;
   object-position: center;
-  margin-right: 6px;
+  margin: 0 42px 0 6px;
 }
 
 .search-form__film-input {
   width: 1px;
   flex-grow: 1;
-  /* flex-shrink: 1; */
   font-size: 18px;
   line-height: 22px;
   font-weight: 500;

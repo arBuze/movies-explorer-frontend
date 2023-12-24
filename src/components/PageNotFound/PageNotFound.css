@@ -34,11 +34,11 @@
   background-color: #FFF;
   border: none;
   padding: 0;
-  bottom: -284px;
+  bottom: calc(-100vh/2 + 100%);
   transition: opacity .2s ease-in;
 }
 
-.page-not-found__return-btn {
+.page-not-found__return-btn:hover {
   cursor: pointer;
   opacity: .7;
 }
@@ -57,6 +57,6 @@
   .page-not-found__return-btn {
     font-size: 14px;
     line-height: 17px;
-    bottom: -184px;
+    bottom: -201px;
   }
 }

@@ -1,6 +1,7 @@
 .navigation {
   display: block;
   width: 100%;
+  margin-left: 45px;
 }
 
 .navigation__links {
@@ -91,7 +92,7 @@
   color: #000;
   background-color: #2BE080;
   border-radius: 3px;
-  margin-left: 10px;
+  margin-left: 3px;
 }
 
 @media (min-width: 768px) {
@@ -101,6 +102,6 @@
     padding: 8px 20px;
   }
   .navigation__auth-item:last-child .navigation__auth-link{
-    margin-left: 2px;
+    margin-left: 11px;
   }
 }

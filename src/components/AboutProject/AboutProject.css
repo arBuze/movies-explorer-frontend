@@ -9,7 +9,7 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  letter-spacing: -1px;
+  letter-spacing: -0.9px;
   margin: 0 0 28px;
 }
 
@@ -28,7 +28,7 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  letter-spacing: -1px;
+  letter-spacing: -0.8px;
   margin: 0 0 16px;
 }
 
@@ -81,20 +81,20 @@
     line-height: 27px;
     margin: 0 0 23px;
   }
+  .about-project__info {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 36px;
+    padding: 70px 0 0;
+  }
   .about-project__fact {
     font-size: 20px;
     line-height: 24px;
-    margin: 0 0 26px;
+    margin: 0 0 22px;
   }
   .about-project__description {
     font-size: 12px;
     line-height: 18px;
-  }
-  .about-project__info {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 70px 0 0;
   }
   .about-project__limits {
     grid-template-columns: 1fr 4fr;
@@ -111,12 +111,12 @@
   .about-project {
     padding: 110px 70px;
   }
+  .about-project__info {
+    gap: 52px;
+  }
   .about-project__description {
     font-size: 14px;
     line-height: 20px;
-  }
-  .about-project__info {
-    gap: 40px;
   }
   .about-project__limits {
     margin: 110px 0 0;

@@ -12,10 +12,18 @@
   padding: 14px;
 }
 
+.movies__film-info {
+  width: 85%;
+}
+
 .movies__film-name {
+  max-width: 100%;
   font-size: 15px;
   line-height: 18px;
   font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   margin: 0 0 9px;
 }
 

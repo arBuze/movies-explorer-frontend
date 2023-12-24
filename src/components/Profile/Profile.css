@@ -114,6 +114,7 @@
 .profile__exit-btn {
   font-size: 12px;
   line-height: 15px;
+  font-weight: 500;
   color: #EE3465;
   background-color: #FFF;
   border: none;
@@ -129,7 +130,7 @@
 @media (min-width: 768px) {
   .profile {
     height: calc(100vh - 74px - 33px);
-    padding: 74px 0 70px;
+    padding: 0;
   }
   .profile__form {
     max-height: 445px;
@@ -152,10 +153,10 @@
 @media (min-width: 1280px) {
   .profile {
     height: calc(100vh - 74px);
-    padding: 74px 0 70px;
+    padding: 4px 0 0;
   }
   .profile__form {
-    max-height: none;
+    max-height: 482px;
   }
   .profile__greeting {
     margin: 0 0 123px;

@@ -1,8 +1,13 @@
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesCard(props) {
+export default function MoviesCard({ card }) {
   const location = useLocation();
+  const {
+    nameRU,
+    duration,
+    image
+  } = card;
 
   function handleSave(e) {
     e.target.classList.toggle('save');
@@ -12,8 +17,8 @@ export default function MoviesCard(props) {
     <li className="movies__list-item">
       <div className="movies__info-container">
         <div className="movies__film-info">
-          <p className="movies__film-name">{props.card.nameRU}</p>
-          <p className="movies__film-duration">{props.card.duration}</p>
+          <p className="movies__film-name">{nameRU}</p>
+          <p className="movies__film-duration">{duration}</p>
         </div>
         {
           location.pathname === '/saved-movies'
@@ -21,7 +26,7 @@ export default function MoviesCard(props) {
           : <button className="movies__save-btn" type="button" onClick={handleSave} />
         }
       </div>
-      <img className="movies__film-image" src={props.card.image} alt={props.card.nameRU} />
+      <img className="movies__film-image" src={image} alt={nameRU} />
     </li>
   )
 }

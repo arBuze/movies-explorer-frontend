@@ -9,7 +9,7 @@
   flex-direction: column-reverse;
   align-items: center;
   box-sizing: border-box;
-  padding: 70px 0 30px;
+  padding: 71px 0 30px;
   margin: 0 auto;
 }
 
@@ -24,7 +24,7 @@
   width: 210px;
   height: 204px;
   background: url(../../images/landing-logo.svg) no-repeat center/cover;
-  margin-bottom: 44px;
+  margin-bottom: 45px;
 }
 
 .promo__title {
@@ -55,7 +55,7 @@
   border: 1px solid rgba(255, 255, 255, .6);
   box-sizing: border-box;
   border-radius: 3px;
-  padding: 10px 20px;
+  padding: 9px 20px;
 }
 
 @media (min-width: 768px) {
