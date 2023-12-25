@@ -9,10 +9,10 @@ export default function Register(props) {
       <div className="register__container">
         <LogoLink />
         <h2 className="register__title">Добро пожаловать!</h2>
-        <AuthForm buttonTitle="Зарегистрироваться">
+        <AuthForm buttonTitle="Зарегистрироваться" name="register" >
           <label className="auth-form__item">
             Имя
-            <input className="auth-form__input-item" type="text" name="name" id="name-input" required />
+            <input className="auth-form__input-item" type="text" name="name" id="name-input" required minLength="2" maxLength="30" />
           </label>
           <span className="auth-form__input-error name-input-error"></span>
         </AuthForm>

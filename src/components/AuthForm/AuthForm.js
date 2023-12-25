@@ -1,8 +1,8 @@
 import './AuthForm.css';
 
-export default function AuthForm({ children, buttonTitle }) {
+export default function AuthForm({ children, buttonTitle, name }) {
   return(
-    <form className="auth-form" method="post">
+    <form className="auth-form" method="post" name={`${name}-form`}>
       <div className="auth-form__input-container">
         {children}
         <label className="auth-form__item">

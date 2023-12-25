@@ -37,29 +37,27 @@ export default function MenuPopup({isOpen, onClose}) {
         <button className="popup__close-btn popup__close-btn_type_menu" type="button" onClick={onClose} />
         <nav className="popup__menu">
           <ul className="popup__menu-links">
-            <div className="popup__links-container">
-              <li className="popup__menu-item">
-                <NavLink to="/"
-                  className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
-                  onClick={onClose} >
-                    Главная
-                </NavLink>
-              </li>
-              <li className="popup__menu-item">
-                <NavLink to="/movies"
-                  className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
-                  onClick={onClose} >
-                    Фильмы
-                </NavLink>
-              </li>
-              <li className="popup__menu-item">
-                <NavLink to="/saved-movies"
-                  className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
-                  onClick={onClose} >
-                    Сохранённые фильмы
-                </NavLink>
-              </li>
-            </div>
+            <li className="popup__menu-item">
+              <NavLink to="/"
+                className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
+                onClick={onClose} >
+                  Главная
+              </NavLink>
+            </li>
+            <li className="popup__menu-item">
+              <NavLink to="/movies"
+                className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
+                onClick={onClose} >
+                  Фильмы
+              </NavLink>
+            </li>
+            <li className="popup__menu-item">
+              <NavLink to="/saved-movies"
+                className={({isActive}) => `popup__menu-link ${isActive ? "popup__menu-link_active" : ""}`}
+                onClick={onClose} >
+                  Сохранённые фильмы
+              </NavLink>
+            </li>
             <li className="popup__menu-item">
               <NavLink to="/profile"
                 className={({isActive}) => `popup__profile-link ${isActive ? "popup__profile-link_active" : ""}`}

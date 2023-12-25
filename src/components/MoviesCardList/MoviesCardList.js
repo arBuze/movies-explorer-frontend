@@ -9,7 +9,7 @@ export default function MoviesCardList({ isLoading, cards }) {
   /* const cardsToAdd = width >= 1280 ? 4 : 2; */
 
   return (
-    <section className="movies">
+    <div className="movies">
       {
         isLoading ? <Preloader /> :
         cards.length === 0 ?
@@ -24,6 +24,6 @@ export default function MoviesCardList({ isLoading, cards }) {
       { cards.length > cardsVisible &&
         <button className="movies__more-btn" type="button">Ещё</button>
       }
-    </section>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ export default function Login(props) {
       <div className="login__container">
         <LogoLink />
         <h2 className="login__title">Рады видеть!</h2>
-        <AuthForm buttonTitle="Войти" />
+        <AuthForm buttonTitle="Войти" name="login" />
         <p className="login__question">
           Ещё не зарегистрированы?
           <Link to="/signup" className="login__link">Регистрация</Link>

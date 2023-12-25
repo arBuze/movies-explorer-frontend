@@ -11,7 +11,7 @@ export default function SearchForm(props) {
   }
 
   return(
-    <form className="search-form" name="search" method="post" onSubmit={handleSubmit} noValidate>
+    <form className="search-form" name="search" method="post" onSubmit={handleSubmit}>
       <div className="search-form__container">
         {
           width >= 768 &&

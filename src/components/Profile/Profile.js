@@ -24,7 +24,7 @@ export default function Profile(props) {
   return(
     <>
       <section className="profile">
-        <form className="profile__form" name="profile" method="patch" onSubmit={handleSubmit}>
+        <form className="profile__form" name="profile" method="post" onSubmit={handleSubmit}>
           <div className="profile__user-data">
           <h2 className="profile__greeting">Привет, Анна!</h2>
             <label className="profile__label">
