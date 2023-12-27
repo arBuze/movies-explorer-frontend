@@ -1,0 +1,62 @@
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 56px 30px 30px;
+}
+
+.login__container {
+  max-width: 396px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.login__title {
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  margin: 50px 0 80px;
+}
+
+.login__question {
+  align-self: center;
+  font-size: 12px;
+  line-height: 15px;
+  color: #A0A0A0;
+  margin: 14px 0 0;
+}
+
+.login__link {
+  color: #FF6838;
+  text-decoration: none;
+  margin-left: 7px;
+  transition: opacity .2s ease-in;
+}
+
+.login__link:hover {
+  opacity: .7;
+}
+
+@media (min-width: 768px) {
+  .login__container {
+    align-items: normal;
+  }
+  .login__title {
+    margin: 40px 0;
+  }
+  .login__question {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 16px 0 0;
+  }
+  .login__link {
+    margin-left: 6px;
+  }
+}
+

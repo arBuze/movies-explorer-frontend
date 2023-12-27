@@ -1,0 +1,137 @@
+.about-me {
+  max-width: 1280px;
+  box-sizing: border-box;
+  padding: 70px 14px;
+  margin: 0 auto;
+}
+
+.about-me__title {
+  width: 100%;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  border-bottom: 1px solid #000;
+  padding: 0 0 28px;
+  margin: 0;
+}
+
+.about-me__container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 0 70px;
+}
+
+.about-me__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__student-name {
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.about-me__status {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 500;
+  margin: 20px 0 9px;
+}
+
+.about-me__description {
+  max-width: 600px;
+  font-size: 11px;
+  line-height: 16px;
+  margin-bottom: 40px;
+}
+
+.about-me__github-link {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  margin-top: auto;
+  transition: opacity .2s ease-in;
+}
+
+.about-me__github-link:hover {
+  opacity: .7;
+}
+
+.about-me__photo {
+  width: 292px;
+  height: 352px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+  .about-me__title {
+    font-size: 22px;
+    line-height: 27px;
+    padding: 0 0 23px;
+  }
+  .about-me__container {
+    flex-direction: row;
+    align-items: stretch;
+    margin: 66px 0 91px;
+  }
+  .about-me__student-name {
+    font-size: 40px;
+    line-height: 1;
+  }
+  .about-me__status {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 16px 0 20px;
+  }
+  .about-me__description {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+  }
+  .about-me__photo {
+    width: 255px;
+    height: 307px;
+    flex-shrink: 0;
+    margin: 0 0 0 50px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .about-me {
+    padding: 110px 70px 125px;
+  }
+  .about-me__container {
+    margin: 66px 0 101px;
+  }
+  .about-me__student-name {
+    font-size: 50px;
+    line-height: 58px;
+  }
+  .about-me__status {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 18px 0 26px;
+  }
+  .about-me__description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .about-me__photo {
+    width: 270px;
+    height: 327px;
+  }
+
+}

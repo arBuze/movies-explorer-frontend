@@ -1,0 +1,131 @@
+.search-form {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 92px 14px 50px;
+  margin: 0 auto;
+}
+
+.search-form__container {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 9px;
+  margin-bottom: 42px;
+}
+
+.search-form__search-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  object-position: center;
+  margin: 0 42px 0 6px;
+}
+
+.search-form__film-input {
+  width: 1px;
+  flex-grow: 1;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  border: none;
+  padding: 0 0 0 0;
+}
+
+.search-form__film-input:focus {
+  outline: none;
+  background-color: #F5F5F5;
+}
+
+.search-form__film-input::placeholder {
+  color: #A0A0A0;
+}
+
+.search-form__submit-btn {
+  width: 34px;
+  height: 34px;
+  background: url(../../images/find-icon.svg) no-repeat center/cover;
+  border: none;
+  padding: 0;
+  margin-left: 46px;
+  transition: opacity .2s ease-in;
+}
+
+.search-form__submit-btn:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.search-form__switch-label {
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search-form__switch {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50% 0 0 0);
+}
+
+.search-form__pseudo-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #EBEBEB;
+  display: block;
+  margin-right: 12px;
+  transition: background-color .2s ease-in;
+}
+
+.search-form__pseudo-switch:hover {
+  cursor: pointer;
+}
+
+.search-form__pseudo-switch::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #F5F5F5;
+  content: "";
+  top: 6px;
+  left: 6px;
+  transition: left .2s ease-in;
+}
+
+.search-form__switch:checked + .search-form__pseudo-switch {
+  background-color: #2BE080;
+}
+
+.search-form__switch:checked + .search-form__pseudo-switch::before {
+  background-color: #FFF;
+  left: calc(100% - 14px);
+}
+
+@media (min-width: 768px) {
+  .search-form {
+    padding: 86px 30px 61px;
+  }
+  .search-form__container {
+    padding-bottom: 15px;
+    margin-bottom: 29px;
+  }
+  .search-form__film-input {
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+  }
+
+}
+
+@media (min-width: 1280px) {
+  .search-form {
+    padding: 70px 70px 48px;
+  }
+}
