@@ -1,0 +1,61 @@
+class MainApi {
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
+  }
+
+  _getResponseData(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res.status);
+  }
+
+  getUserInfo(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        "Authorization" : `Bearer ${token}`,
+        ...this._headers
+      }
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
+
+  getSavedFilms(token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        "Authorization" : `Bearer ${token}`,
+        ...this._headers
+      }
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
+
+  updateUserData(name, email, token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        "Authorization" : `Bearer ${token}`,
+        ...this._headers
+      },
+      body: JSON.stringify({
+        name,
+        email
+      })
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
+}
+
+export const mainApi = new MainApi({
+  baseUrl: 'http://localhost:3000', /* 'https://api.asid.mesto.nomoredomainsmonster.ru' */
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});

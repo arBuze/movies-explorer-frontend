@@ -6,8 +6,15 @@ export default function MoviesCard({ card }) {
   const {
     nameRU,
     duration,
-    image
+    image,
+    trailerLink,
   } = card;
+
+  function translateTime(time) {
+    const hours = Math.floor(time / 60);
+    const minutes = time - (hours * 60);
+    return `${hours ? `${hours}ч` : ''} ${minutes ? `${minutes}м` : ''}`
+  }
 
   function handleSave(e) {
     e.target.classList.toggle('save');
@@ -18,7 +25,7 @@ export default function MoviesCard({ card }) {
       <div className="movies__info-container">
         <div className="movies__film-info">
           <p className="movies__film-name">{nameRU}</p>
-          <p className="movies__film-duration">{duration}</p>
+          <p className="movies__film-duration">{translateTime(duration)}</p>
         </div>
         {
           location.pathname === '/saved-movies'
@@ -26,7 +33,9 @@ export default function MoviesCard({ card }) {
           : <button className="movies__save-btn" type="button" onClick={handleSave} />
         }
       </div>
-      <img className="movies__film-image" src={image} alt={nameRU} />
+      <a className="movies__trailer-link" href={trailerLink} target="_blank" rel="noopener noreferrer">
+        <img className="movies__film-image" src={`https://api.nomoreparties.co${image.url}`} alt={nameRU} />
+      </a>
     </li>
   )
 }

@@ -36,7 +36,7 @@ export default function Navigation({ isLoggedIn }) {
                 <Link to="/signup" className="navigation__auth-link">Регистрация</Link>
               </li>
               <li className="navigation__auth-item">
-                <Link to="/signup" className="navigation__auth-link">Войти</Link>
+                <Link to="/signin" className="navigation__auth-link">Войти</Link>
               </li>
             </>
           }

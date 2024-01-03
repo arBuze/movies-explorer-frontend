@@ -1,18 +1,20 @@
 import './AuthForm.css';
 
-export default function AuthForm({ children, buttonTitle, name }) {
+export default function AuthForm({ children, buttonTitle, name, emailValue, passwordValue, onSubmit, onChange }) {
   return(
-    <form className="auth-form" method="post" name={`${name}-form`}>
+    <form className="auth-form" method="post" name={`${name}-form`} onSubmit={onSubmit}>
       <div className="auth-form__input-container">
         {children}
         <label className="auth-form__item">
           E-mail
-          <input className="auth-form__input-item" type="email" name="email" id="email-input" required />
+          <input className="auth-form__input-item" type="email" name="email" id="email-input" required
+            value={emailValue} onChange={onChange} />
         </label>
         <span className="auth-form__input-error email-input-error"></span>
         <label className="auth-form__item">
           Пароль
-          <input className="auth-form__input-item error" type="password" name="password" id="password-input" required />
+          <input className="auth-form__input-item error" type="password" name="password" id="password-input" required
+            value={passwordValue} onChange={onChange} />
         </label>
         <span className="auth-form__input-error password-input-error">Что-то пошло не так...</span>
       </div>
