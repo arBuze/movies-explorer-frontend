@@ -67,7 +67,7 @@ class AuthApi {
 }
 
 export const auth = new AuthApi({
-  baseUrl: 'http://localhost:3000', /* 'https://api.asid.mesto.nomoredomainsmonster.ru' */
+  baseUrl: 'api.asid.movies-explore.nomoredomainsmonster.ru', /* 'http://localhost:3000' */
   headers: {
     'Content-Type': 'application/json'
   }

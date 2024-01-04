@@ -64,9 +64,14 @@
   transition: opacity .2s ease-in;
 }
 
-.auth-form__submit-btn:hover {
+.auth-form__submit-btn:not(:disabled):hover {
   cursor: pointer;
   opacity: .8;
+}
+
+.auth-form__submit-btn:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
 }
 
 @media (min-width: 768px) {

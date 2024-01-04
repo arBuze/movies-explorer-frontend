@@ -51,6 +51,37 @@ class MainApi {
         return this._getResponseData(res);
       });
   }
+
+  addSavedFilm(card, token) {
+    console.log(card);
+
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: {
+        "Authorization" : `Bearer ${token}`,
+        ...this._headers
+      },
+      body: JSON.stringify({
+        ...card
+      })
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
+
+  deleteSavedFilm(cardId, token) {
+    return fetch(`${this._baseUrl}/movies/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        "Authorization" : `Bearer ${token}`,
+        ...this._headers
+      }
+    })
+      .then(res => {
+        return this._getResponseData(res);
+      });
+  }
 }
 
 export const mainApi = new MainApi({

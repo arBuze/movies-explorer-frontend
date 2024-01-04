@@ -12,11 +12,11 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import MenuPopup from '../MenuPopup/MenuPopup';
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
-import ProtectedRoute from '../ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import { auth } from '../../utils/AuthApi';
-import { errorTexts } from '../../utils/constants';
+import { AUTH_TEXTS, ERROR_TEXTS } from '../../utils/constants';
 import { CurrentUserContext } from '../../contexts/CurrentUserContexts';
 
 function App() {
@@ -28,13 +28,17 @@ function App() {
   const [cards, setCards] = useState([]);
   const [foundCards, setFoundCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
+  const [foundSavedCards, setFoundSavedCards] = useState([]);
+  const [showFoundCards, setShowFoundCards] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [isSearchFailed, setIsSearchFailed] = useState(false);
+  const [isSavedSearchFailed, setIsSavedSearchFailed] = useState(false);
   const [message, setMessage] = useState('');
   const [isEdit, setIsEdit] = useState(false);
   const [profileError, setProfileError] = useState('');
   const navigate = useNavigate();
 
+  /* загрузка данных пользователя и сохраненных фильмов */
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token) {
@@ -43,29 +47,39 @@ function App() {
           setCurrentUser(userData);
           setSavedCards(cardsData);
         })
-        .catch( err => {
+        .catch((err) => {
           console.log(err);
         });
     }
   }, [isLoggedIn])
 
+  /* загрузка найденных фильмов */
+  useEffect(() => {
+    const foundFilms = JSON.parse(localStorage.getItem('found-films'));
+    if (foundFilms) {
+      setFoundCards(foundFilms);
+    }
+  }, [])
+
+  /* проверка токена */
   useEffect(() => {
     const token = localStorage.getItem('jwt');
-    if(token) {
+    if (token) {
       auth.checkToken(token)
-        .then(res => {
-          if(res) {
+        .then((res) => {
+          if (res) {
             setIsLoggedIn(true);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           localStorage.removeItem('jwt');
           console.log(err);
         });
     }
   }, [navigate])
 
-  function handleSearch(request, cardsToFilter = cards) {
+  /* поиск по фильмам */
+  function handleSearch(request, cardsToFilter = cards, searchInSaved = false) {
     const name = request.toLowerCase();
 
     const found = cardsToFilter.filter((item) => {
@@ -75,12 +89,23 @@ function App() {
       return (nameRU.includes(name) || nameEN.includes(name));
     });
 
-    if (found.length === 0) {
-      setIsSearchFailed(true);
+    if (searchInSaved) {
+      if (found.length === 0) {
+        setIsSavedSearchFailed(true);
+      } else {
+        setIsSavedSearchFailed(false);
+      }
+      setFoundSavedCards(found);
     } else {
-      setIsSearchFailed(false);
+      if (found.length === 0) {
+        setIsSearchFailed(true);
+      } else {
+        setIsSearchFailed(false);
+      }
+      setFoundCards(found);
+      localStorage.setItem('found-films', JSON.stringify(found));
+      localStorage.setItem('request', request);
     }
-    setFoundCards(found);
   }
 
   function handleSearchClick(request) {
@@ -92,9 +117,10 @@ function App() {
           handleSearch(request, res);
         })
         .catch((err) => {
-          setMessage(errorTexts.searchError);
+          setMessage(ERROR_TEXTS.searchError);
           setIsSuccessful(false);
           setIsInfoToolTipOpen(true);
+          console.log(err);
         })
         .finally(() => {
           setIsSearchLoading(false);
@@ -103,22 +129,52 @@ function App() {
       handleSearch(request);
       setIsSearchLoading(false);
     }
-
   }
 
-  function handleMenuPopupOpen() {
-    setIsMenuPopupOpen(true);
+  function handleSavedSearchClick(request) {
+    handleSearch(request, savedCards, true);
+    setShowFoundCards(true);
   }
 
-  function closeAllPopups() {
-    setIsMenuPopupOpen(false);
-    setIsInfoToolTipOpen(false);
+  function handleResetShowCards() {
+    setShowFoundCards(false);
+  }
+
+  /* сохранение фильма */
+  function handleSaveClick(card) {
+    const token = localStorage.getItem('jwt');
+    mainApi.addSavedFilm(card, token)
+      .then((newCard) => {
+        setSavedCards([...savedCards, newCard]);
+      })
+      .catch((err) => {
+        handleFailure(ERROR_TEXTS.saveError);
+        console.log(err);
+      });
+  }
+
+  /* удаление фильма из сохраненных */
+  function handleDeleteClick(cardId) {
+    const token = localStorage.getItem('jwt');
+    mainApi.deleteSavedFilm(cardId, token)
+      .then(() => {
+        setSavedCards(savedCards.filter((item) => !(item._id === cardId)));
+      })
+      .catch((err) => {
+        if (err === 404) {
+          handleFailure(ERROR_TEXTS.findError);
+        } else {
+          handleFailure(ERROR_TEXTS.deleteError);
+        }
+        console.log(err);
+      })
   }
 
   function handleEditClick() {
     setIsEdit(true);
   }
 
+  /* обновление профиля */
   function handleUserUpdate(name, email) {
     setProfileError('');
     const token = localStorage.getItem('jwt');
@@ -130,26 +186,12 @@ function App() {
         })
         .catch((err) => {
           if (err === 409) {
-            setProfileError('Пользователь с таким email уже существует.');
+            setProfileError(ERROR_TEXTS.sameEmailError);
           } else {
-            setProfileError('При обновлении профиля произошла ошибка.');
+            setProfileError(ERROR_TEXTS.upadateProfileError);
           }
         })
     }
-  }
-
-  function handleRegister() {
-    setIsLoggedIn(true);
-    setMessage('Регистрация прошла успешно!');
-    setIsSuccessful(true);
-    setIsInfoToolTipOpen(true);
-  }
-
-  function handleLogin() {
-    setIsLoggedIn(true);
-    setMessage('Вы успешно авторизировались!');
-    setIsSuccessful(true);
-    setIsInfoToolTipOpen(true);
   }
 
   function handleFailure(text) {
@@ -158,9 +200,41 @@ function App() {
     setIsInfoToolTipOpen(true);
   }
 
+  /* авторизация */
+  function handleRegister() {
+    setIsLoggedIn(true);
+    setMessage(AUTH_TEXTS.register);
+    setIsSuccessful(true);
+    setIsInfoToolTipOpen(true);
+  }
+
+  function handleLogin() {
+    setIsLoggedIn(true);
+    setMessage(AUTH_TEXTS.auth);
+    setIsSuccessful(true);
+    setIsInfoToolTipOpen(true);
+  }
+
   function handleSignOut() {
     setIsLoggedIn(false);
+    setCurrentUser({});
+    setFoundCards([]);
+    setSavedCards([]);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('found-films');
+    localStorage.removeItem('request');
+    localStorage.removeItem('filter');
+  }
+
+  /* управление попапами */
+  function handleMenuPopupOpen() {
+    setIsMenuPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setIsMenuPopupOpen(false);
+    setMessage('');
+    setIsInfoToolTipOpen(false);
   }
 
   return (
@@ -172,9 +246,14 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/movies" element={<ProtectedRoute element={Movies} loggedIn={isLoggedIn}
               cards={foundCards} onSearchClick={handleSearchClick}
-              isLoading={isSearchLoading} isFailed={isSearchFailed} />} />
+              isLoading={isSearchLoading} isFailed={isSearchFailed}
+              savedCards={savedCards} onSaveClick={handleSaveClick}
+              onDeleteClick={handleDeleteClick} />} />
             <Route path="/saved-movies" element={<ProtectedRoute element={SavedMovies} loggedIn={isLoggedIn}
-              cards={savedCards} isLoading={isSearchLoading} isFailed={isSearchFailed} />} />
+              cards={showFoundCards ? foundSavedCards : savedCards}
+              onSearchClick={handleSavedSearchClick} isLoading={isSearchLoading}
+              isFailed={isSavedSearchFailed} onDeleteClick={handleDeleteClick}
+              resetShowCards={handleResetShowCards} />} />
             <Route path="/profile" element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn}
               isEdit={isEdit} onEditClick={handleEditClick}
               onDataUpdate={handleUserUpdate} onSignOut={handleSignOut}
