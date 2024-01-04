@@ -58,7 +58,6 @@ export default function MoviesCard({ card, savedCards, onSaveClick, onDeleteClic
       const movie = savedCards.filter((item) => item.movieId === id);
       onDeleteClick(movie[0]._id);
     } else {
-      console.log(card._id);
       onDeleteClick(card._id);
     }
   }

@@ -26,8 +26,7 @@ class AuthApi {
       })
       .then((res) => {
         return res;
-      })
-      .catch((err) => console.log(err));
+      });
   }
 
   authorize(email, password) {
@@ -47,8 +46,7 @@ class AuthApi {
           localStorage.setItem('jwt', data.token);
           return data;
         }
-      })
-      .catch(err => console.log(err))
+      });
   }
 
   checkToken(token) {
@@ -61,13 +59,12 @@ class AuthApi {
     .then((response) => {
       return this._getResponseData(response);
     })
-    .then(data => data)
-    .catch(err => console.log(err));
+    .then(data => data);
   }
 }
 
 export const auth = new AuthApi({
-  baseUrl: 'api.asid.movies-explore.nomoredomainsmonster.ru', /* 'http://localhost:3000' */
+  baseUrl: 'https://api.asid.movies-explore.nomoredomainsmonster.ru', /* 'http://localhost:3000' */
   headers: {
     'Content-Type': 'application/json'
   }

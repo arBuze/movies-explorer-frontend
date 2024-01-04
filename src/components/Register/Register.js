@@ -20,7 +20,7 @@ export default function Register({ onRegister, onFailure }) {
 
     auth.register(email, password, name)
       .then((res) => {
-        if (res.error) {
+        if (res?.error) {
           onFailure(ERROR_TEXTS.registerError);
           return;
         }

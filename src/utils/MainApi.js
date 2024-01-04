@@ -53,8 +53,6 @@ class MainApi {
   }
 
   addSavedFilm(card, token) {
-    console.log(card);
-
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: {
@@ -85,7 +83,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: 'http://localhost:3000', /* 'https://api.asid.mesto.nomoredomainsmonster.ru' */
+  baseUrl: 'https://api.asid.movies-explore.nomoredomainsmonster.ru', /*'http://localhost:3000'*/
   headers: {
     'Content-Type': 'application/json'
   }
