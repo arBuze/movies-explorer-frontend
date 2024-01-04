@@ -39,7 +39,7 @@ export default function Login({ onLogin, onFailure }) {
         <h2 className="login__title">Рады видеть!</h2>
         <AuthForm buttonTitle="Войти" name="login"
           emailValue={values.email} passwordValue={values.password}
-          emailError={errors.email} passwordError={errors.password}
+          emailError={errors?.email} passwordError={errors?.password}
           onSubmit={handleSubmit} onChange={handleChange}
           isValid={isValid} />
         <p className="login__question">

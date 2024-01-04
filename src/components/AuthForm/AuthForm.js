@@ -9,13 +9,13 @@ export default function AuthForm({ children, buttonTitle, name, emailValue, pass
         <label className="auth-form__item">
           E-mail
           <input className={`auth-form__input-item ${emailError ? 'error' : ''}`} type="email" name="email" id="email-input" required
-            pattern={EMAIL_REG} value={emailValue} onChange={onChange} />
+            pattern={EMAIL_REG} value={emailValue ? emailValue : ''} onChange={onChange} />
         </label>
         <span className="auth-form__input-error email-input-error">{emailError}</span>
         <label className="auth-form__item">
           Пароль
           <input className={`auth-form__input-item ${passwordError ? 'error' : ''}`} type="password" name="password" id="password-input" required
-            value={passwordValue} onChange={onChange} />
+            value={passwordValue ? passwordValue : ''} onChange={onChange} />
         </label>
         <span className="auth-form__input-error password-input-error">{passwordError}</span>
       </div>

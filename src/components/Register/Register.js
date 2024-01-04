@@ -48,15 +48,15 @@ export default function Register({ onRegister, onFailure }) {
         <h2 className="register__title">Добро пожаловать!</h2>
         <AuthForm buttonTitle="Зарегистрироваться" name="register"
           emailValue={values.email} passwordValue={values.password}
-          emailError={errors.email} passwordError={errors.password}
+          emailError={errors?.email} passwordError={errors?.password}
           onSubmit={handleSubmit} onChange={handleChange}
           isValid={isValid} >
           <label className="auth-form__item">
             Имя
             <input className={`auth-form__input-item ${errors.name ? 'error' : ''}`} type="text" name="name" id="name-input" required
-              value={values.name} onChange={handleChange} minLength="2" maxLength="30" pattern={NAME_REG} />
+              value={values.name ? values.name : ''} onChange={handleChange} minLength="2" maxLength="30" pattern={NAME_REG} />
           </label>
-          <span className="auth-form__input-error name-input-error">{errors.name}</span>
+          <span className="auth-form__input-error name-input-error">{errors?.name}</span>
         </AuthForm>
         <p className="register__question">
           Уже зарегистрированы?
