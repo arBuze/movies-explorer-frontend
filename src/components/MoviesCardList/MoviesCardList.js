@@ -1,15 +1,14 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import Preloader from '../Preloader/Preloader';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { RESOLUTION, VISIBLE_CARDS, CARDS_ADD } from '../../utils/constants';
 
-export default function MoviesCardList({ isLoading, cards, isFailed, savedCards, onSaveClick, onDeleteClick }) {
-  const { width } = useWindowDimensions();
+export default function MoviesCardList({ isLoading, cards, isFailed, savedCards, onSaveClick, onDeleteClick, width }) {
   const location = useLocation();
-  const maxCards = location.pathname === '/saved-movies' ? cards.length : width >= 1280 ? 12 : width >= 768 ? 8 : 5;
-  const cardsToAdd = width >= 1280 ? 3 : 2;
+  const maxCards = location.pathname === '/saved-movies' ? cards.length : width >= RESOLUTION.desktop ? VISIBLE_CARDS.max : width >= RESOLUTION.tablet ? VISIBLE_CARDS.mid : VISIBLE_CARDS.min;
+  const cardsToAdd = width >= RESOLUTION.desktop ? CARDS_ADD.max : CARDS_ADD.min;
   const [cardsVisible, setCardsVisible] = useState([]);
   const [numberOfCards, setNumberOfCards] = useState(0);
 

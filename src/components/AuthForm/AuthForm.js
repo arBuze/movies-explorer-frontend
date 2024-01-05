@@ -1,7 +1,13 @@
 import './AuthForm.css';
 import { EMAIL_REG } from '../../utils/constants';
 
-export default function AuthForm({ children, buttonTitle, name, emailValue, passwordValue, emailError, passwordError, onSubmit, onChange, isValid }) {
+export default function AuthForm({
+  children, buttonTitle, name,
+  emailValue, passwordValue,
+  emailError, passwordError,
+  onSubmit, onChange,
+  isValid, isLoading })
+{
   return(
     <form className="auth-form" method="post" name={`${name}-form`} onSubmit={onSubmit} noValidate >
       <div className="auth-form__input-container">
@@ -19,7 +25,7 @@ export default function AuthForm({ children, buttonTitle, name, emailValue, pass
         </label>
         <span className="auth-form__input-error password-input-error">{passwordError}</span>
       </div>
-      <button className="auth-form__submit-btn" type="submit" disabled={!isValid} >{buttonTitle}</button>
+      <button className="auth-form__submit-btn" type="submit" disabled={!isValid || isLoading} >{buttonTitle}</button>
     </form>
   );
 }

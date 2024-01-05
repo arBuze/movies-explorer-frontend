@@ -4,12 +4,12 @@ import AboutProject from "../AboutProject/AboutProject";
 import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 
-export default function Main(props) {
+export default function Main({ width }) {
   return(
     <>
       <Promo />
       <AboutProject />
-      <Techs />
+      <Techs width={width} />
       <AboutMe />
     </>
   );

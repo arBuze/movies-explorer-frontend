@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -16,10 +16,12 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import { auth } from '../../utils/AuthApi';
-import { AUTH_TEXTS, ERROR_TEXTS } from '../../utils/constants';
+import { RESPONSE_TEXTS, ERROR_TEXTS, ERROR_CODES } from '../../utils/constants';
 import { CurrentUserContext } from '../../contexts/CurrentUserContexts';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 function App() {
+  const [isPageLoaded, setIsPageLoaded] = useState(false); /* нужен, так как редирект на "/" происходит из-за начального значения isLoggedIn и НОС */
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
@@ -36,7 +38,8 @@ function App() {
   const [message, setMessage] = useState('');
   const [isEdit, setIsEdit] = useState(false);
   const [profileError, setProfileError] = useState('');
-  const navigate = useNavigate();
+  const [isUpdateResponseLoading, setIsUpdateResponseLoading] = useState(false);
+  const { width } = useWindowDimensions();
 
   /* загрузка данных пользователя и сохраненных фильмов */
   useEffect(() => {
@@ -74,9 +77,14 @@ function App() {
         .catch((err) => {
           localStorage.removeItem('jwt');
           console.log(err);
+        })
+        .finally(() => {
+          setIsPageLoaded(true);
         });
+    } else {
+      setIsPageLoaded(true);
     }
-  }, [navigate])
+  }, [])
 
   /* поиск по фильмам */
   function handleSearch(request, cardsToFilter = cards, searchInSaved = false) {
@@ -138,6 +146,7 @@ function App() {
 
   function handleResetShowCards() {
     setShowFoundCards(false);
+    setIsSavedSearchFailed(false);
   }
 
   /* сохранение фильма */
@@ -159,9 +168,11 @@ function App() {
     mainApi.deleteSavedFilm(cardId, token)
       .then(() => {
         setSavedCards(savedCards.filter((item) => !(item._id === cardId)));
+        setFoundSavedCards(foundSavedCards.filter((item) => !(item._id === cardId)));
+        savedCards.length === 1 && setIsSavedSearchFailed(true);
       })
       .catch((err) => {
-        if (err === 404) {
+        if (err === ERROR_CODES.notFound) {
           handleFailure(ERROR_TEXTS.findError);
         } else {
           handleFailure(ERROR_TEXTS.deleteError);
@@ -179,40 +190,48 @@ function App() {
     setProfileError('');
     const token = localStorage.getItem('jwt');
     if (token) {
+      setIsUpdateResponseLoading(true);
       mainApi.updateUserData(name, email, token)
         .then((res) => {
           setCurrentUser(res);
           setIsEdit(false);
+          handleSuccess(RESPONSE_TEXTS.saveData);
         })
         .catch((err) => {
-          if (err === 409) {
+          if (err === ERROR_CODES.conflict) {
             setProfileError(ERROR_TEXTS.sameEmailError);
           } else {
             setProfileError(ERROR_TEXTS.upadateProfileError);
           }
         })
+        .finally(() => {
+          setIsUpdateResponseLoading(false);
+        })
     }
   }
 
+  /* вывод сообщения */
   function handleFailure(text) {
     setMessage(text);
     setIsSuccessful(false);
     setIsInfoToolTipOpen(true);
   }
 
-  /* авторизация */
-  function handleRegister() {
-    setIsLoggedIn(true);
-    setMessage(AUTH_TEXTS.register);
+  function handleSuccess(text) {
+    setMessage(text);
     setIsSuccessful(true);
     setIsInfoToolTipOpen(true);
   }
 
+  /* авторизация */
+  function handleRegister() {
+    setIsLoggedIn(true);
+    handleSuccess(RESPONSE_TEXTS.register);
+  }
+
   function handleLogin() {
     setIsLoggedIn(true);
-    setMessage(AUTH_TEXTS.auth);
-    setIsSuccessful(true);
-    setIsInfoToolTipOpen(true);
+    handleSuccess(RESPONSE_TEXTS.auth);
   }
 
   function handleSignOut() {
@@ -239,33 +258,35 @@ function App() {
 
   return (
     <div className="page">
-      <Header isLoggedIn={isLoggedIn} onMenuButtonClick={handleMenuPopupOpen} />
+      <Header isLoggedIn={isLoggedIn} onMenuButtonClick={handleMenuPopupOpen} width={width} />
       <main className="content">
         <CurrentUserContext.Provider value={currentUser}>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/movies" element={<ProtectedRoute element={Movies} loggedIn={isLoggedIn}
-              cards={foundCards} onSearchClick={handleSearchClick}
-              isLoading={isSearchLoading} isFailed={isSearchFailed}
-              savedCards={savedCards} onSaveClick={handleSaveClick}
-              onDeleteClick={handleDeleteClick} />} />
-            <Route path="/saved-movies" element={<ProtectedRoute element={SavedMovies} loggedIn={isLoggedIn}
-              cards={showFoundCards ? foundSavedCards : savedCards}
-              onSearchClick={handleSavedSearchClick} isLoading={isSearchLoading}
-              isFailed={isSavedSearchFailed} onDeleteClick={handleDeleteClick}
-              resetShowCards={handleResetShowCards} />} />
-            <Route path="/profile" element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn}
-              isEdit={isEdit} onEditClick={handleEditClick}
-              onDataUpdate={handleUserUpdate} onSignOut={handleSignOut}
-              error={profileError} />} />
-            <Route path="/signup" element={<Register onRegister={handleRegister} onFailure={handleFailure} />} />
-            <Route path="/signin" element={<Login onLogin={handleLogin} onFailure={handleFailure} />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+        { isPageLoaded &&
+          (<Routes>
+            <Route path="/" element={<Main width={width} />} />
+              <Route path="/movies" element={<ProtectedRoute element={Movies} loggedIn={isLoggedIn}
+                cards={foundCards} onSearchClick={handleSearchClick}
+                isLoading={isSearchLoading} isFailed={isSearchFailed}
+                savedCards={savedCards} onSaveClick={handleSaveClick}
+                onDeleteClick={handleDeleteClick} width={width} />} />
+              <Route path="/saved-movies" element={<ProtectedRoute element={SavedMovies} loggedIn={isLoggedIn}
+                cards={showFoundCards ? foundSavedCards : savedCards}
+                onSearchClick={handleSavedSearchClick} isLoading={isSearchLoading}
+                isFailed={isSavedSearchFailed} onDeleteClick={handleDeleteClick}
+                resetShowCards={handleResetShowCards} width={width} />} />
+              <Route path="/profile" element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn}
+                isEdit={isEdit} onEditClick={handleEditClick}
+                onDataUpdate={handleUserUpdate} onSignOut={handleSignOut}
+                error={profileError} isLoading={isUpdateResponseLoading} />} />
+              <Route path="/signup" element={<Register onRegister={handleRegister} onFailure={handleFailure} />} />
+              <Route path="/signin" element={<Login onLogin={handleLogin} onFailure={handleFailure} />} />
+              <Route path="*" element={<PageNotFound />} />
+          </Routes>)
+        }
         </CurrentUserContext.Provider>
       </main>
-      <Footer />
-      <MenuPopup isOpen={isMenuPopupOpen} onClose={closeAllPopups} />
+      <Footer width={width} />
+      <MenuPopup isOpen={isMenuPopupOpen} onClose={closeAllPopups} width={width} />
       <InfoToolTip isOpen={isInfoToolTipOpen} isSuccessful={isSuccessful} message={message} onClose={closeAllPopups} />
     </div>
   );

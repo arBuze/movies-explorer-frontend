@@ -1,10 +1,9 @@
 import './MenuPopup.css';
 import { NavLink } from 'react-router-dom';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { useEffect } from 'react';
+import { RESOLUTION } from '../../utils/constants';
 
-export default function MenuPopup({isOpen, onClose}) {
-  const { width } = useWindowDimensions();
+export default function MenuPopup({ isOpen, onClose, width }) {
 
   useEffect(() => {
     if (isOpen) return;
@@ -20,7 +19,7 @@ export default function MenuPopup({isOpen, onClose}) {
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (width >= 1024 && isOpen) {
+    if (width >= RESOLUTION.laptop && isOpen) {
       onClose();
     }
   },[width, isOpen, onClose]);

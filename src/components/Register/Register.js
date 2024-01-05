@@ -1,14 +1,16 @@
 import './Register.css';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../AuthForm/AuthForm';
 import LogoLink from '../LogoLink/LogoLink';
 import { auth } from '../../utils/AuthApi';
 import useFormValidation from '../../hooks/useFormValidation';
-import { ERROR_TEXTS, NAME_REG } from '../../utils/constants';
+import { ERROR_CODES, ERROR_TEXTS, NAME_REG } from '../../utils/constants';
 
 export default function Register({ onRegister, onFailure }) {
   const navigate = useNavigate();
   const { values, errors, isValid, handleChange } = useFormValidation();
+  const [isRegisterResponseLoading, setIsRegisterResponseLoading] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -18,6 +20,7 @@ export default function Register({ onRegister, onFailure }) {
       return;
     }
 
+    setIsRegisterResponseLoading(true);
     auth.register(email, password, name)
       .then((res) => {
         if (res?.error) {
@@ -35,9 +38,12 @@ export default function Register({ onRegister, onFailure }) {
         }
       })
       .catch((err) => {
-        const errorText = err === 409 ? ERROR_TEXTS.sameEmailError : ERROR_TEXTS.registerError;
+        const errorText = err === ERROR_CODES.conflict ? ERROR_TEXTS.sameEmailError : ERROR_TEXTS.registerError;
         onFailure(errorText);
         console.log(err);
+      })
+      .finally(() => {
+        setIsRegisterResponseLoading(false);
       })
   }
 
@@ -50,7 +56,7 @@ export default function Register({ onRegister, onFailure }) {
           emailValue={values.email} passwordValue={values.password}
           emailError={errors?.email} passwordError={errors?.password}
           onSubmit={handleSubmit} onChange={handleChange}
-          isValid={isValid} >
+          isValid={isValid} isLoading={isRegisterResponseLoading} >
           <label className="auth-form__item">
             Имя
             <input className={`auth-form__input-item ${errors.name ? 'error' : ''}`} type="text" name="name" id="name-input" required

@@ -1,13 +1,12 @@
 import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation';
+import { RESOLUTION } from '../../utils/constants';
 
-export default function SearchForm({ onSearchClick, onFilter, isChecked, isLoading }) {
-  const { width } = useWindowDimensions();
+export default function SearchForm({ onSearchClick, onFilter, isChecked, isLoading, width }) {
   const { values, setValues, errors, handleChange, isValid } = useFormValidation();
   const location = useLocation();
 
@@ -31,7 +30,7 @@ export default function SearchForm({ onSearchClick, onFilter, isChecked, isLoadi
     <form className="search-form" name="search-form" method="post" onSubmit={handleSubmit} noValidate>
       <div className="search-form__container">
         {
-          width >= 768 &&
+          width >= RESOLUTION.tablet &&
           <img className="search-form__search-icon" src={searchIcon} alt="Иконка поиска" />
         }
         <input className="search-form__film-input" type="text" name="search" required placeholder="Фильм" minLength="1" id="film-input"
