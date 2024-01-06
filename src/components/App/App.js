@@ -169,7 +169,7 @@ function App() {
       .then(() => {
         setSavedCards(savedCards.filter((item) => !(item._id === cardId)));
         setFoundSavedCards(foundSavedCards.filter((item) => !(item._id === cardId)));
-        savedCards.length === 1 && setIsSavedSearchFailed(true);
+        (savedCards.length === 1 || foundSavedCards.length === 1) && setIsSavedSearchFailed(true);
       })
       .catch((err) => {
         if (err === ERROR_CODES.notFound) {
