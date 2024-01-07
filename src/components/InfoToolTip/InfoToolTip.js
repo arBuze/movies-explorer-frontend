@@ -3,7 +3,7 @@ import iconFailure from '../../images/not-success.svg'
 import './InfoToolTip.css';
 import { useEffect } from "react";
 
-export default function InfoToolTip({ isOpen, onClose, isSuccessful }) {
+export default function InfoToolTip({ isOpen, onClose, isSuccessful, message }) {
   useEffect(() => {
     if (isOpen) return;
     function handleEscapeClose(e) {
@@ -29,7 +29,7 @@ export default function InfoToolTip({ isOpen, onClose, isSuccessful }) {
         <button className="popup__close-btn popup__close-btn_type_success" type="button" onClick={onClose}></button>
         <img className="popup__success-icon" src={isSuccessful ? iconSuccess : iconFailure} alt="иконка"/>
         <h2 className="popup__heading popup__heading_type_success">
-          {isSuccessful ? 'Успешно!' : 'Что-то пошло не так! Попробуйте ещё раз.'}
+          {message}
         </h2>
       </div>
     </div>

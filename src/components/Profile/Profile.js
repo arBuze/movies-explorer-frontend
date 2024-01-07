@@ -1,24 +1,46 @@
 import './Profile.css';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContexts';
+import useFormValidation from '../../hooks/useFormValidation';
+import { NAME_REG, EMAIL_REG } from '../../utils/constants';
 
-export default function Profile(props) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [formValue, setFormValue] = useState({name:'', email: ''});
+export default function Profile({ isEdit, onEditClick, onDataUpdate, onSignOut, error, isLoading }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const { values, setValues, handleChange, errors, isValid } = useFormValidation();
+  const [isSameData, setIsSameData] = useState(false);
+
+  useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email
+    });
+  }, [currentUser])
 
   function handleEditClick() {
-    setIsEdit(true);
+    onEditClick();
   }
 
-  function handleChange(e) {
+  function handleInputChange(e) {
+    handleChange(e);
     const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
+    let equal;
+    if (name === 'name') {
+      equal = (value === currentUser.name && values.email === currentUser.email);
+    } else {
+      equal = (value === currentUser.email && values.name === currentUser.name);
+    }
+    setIsSameData(equal);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+    const { name, email } = values;
+
+    if (!name || !email) {
+      return;
+    }
+
+    onDataUpdate(name, email);
   }
 
   return(
@@ -26,29 +48,34 @@ export default function Profile(props) {
       <section className="profile">
         <form className="profile__form" name="profile" method="post" onSubmit={handleSubmit}>
           <div className="profile__user-data">
-          <h2 className="profile__greeting">Привет, Анна!</h2>
+          <h2 className="profile__greeting">Привет, {currentUser.name}</h2>
             <label className="profile__label">
               Имя
               <input className="profile__input-item" type="text" required name="name" id="name-input" minLength="2" maxLength="30"
-                disabled={!isEdit} value={formValue.name} onChange={handleChange} />
+                pattern={NAME_REG} disabled={!isEdit} value={values.name ? values.name : ''} onChange={handleInputChange}/>
             </label>
+            <span className="profile__input-error name-input-error">{errors.name}</span>
             <label className="profile__label">
               E-mail
               <input className="profile__input-item" type="email" required name="email" id="email-input"
-                disabled={!isEdit} value={formValue.email} onChange={handleChange} />
+                pattern={EMAIL_REG} disabled={!isEdit} value={values.email ? values.email : ''} onChange={handleInputChange} />
             </label>
+            <span className="profile__input-error email-input-error">{errors?.email}</span>
           </div>
           <div className="profile__btn-container">
             {
               isEdit ?
               <>
-                <span className="profile__form-error">Вы ввели неправильный логин или пароль</span>
-                <button className="profile__save-btn" type="submit" disabled={false}>Сохранить</button>
+                <span className="profile__form-error">{error}</span>
+                <button className="profile__save-btn" type="submit"
+                  disabled={!isValid || isLoading || isSameData}>
+                    Сохранить
+                </button>
               </>
               :
               <>
                 <button className="profile__edit-btn" type="button" onClick={handleEditClick}>Редактировать</button>
-                <button className="profile__exit-btn" type="button">Выйти из аккаунта</button>
+                <button className="profile__exit-btn" type="button" onClick={onSignOut}>Выйти из аккаунта</button>
               </>
             }
           </div>

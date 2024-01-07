@@ -50,6 +50,16 @@
   margin: 0 0 30px;
 }
 
+.footer__organization-link {
+  color: #000;
+  text-decoration: none;
+  transition: opacity .2s ease-in;
+}
+
+.footer__organization-link:hover {
+  opacity: .7;
+}
+
 @media (min-width: 768px) {
   .footer__container {
     padding: 79px 30px 20px;

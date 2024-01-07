@@ -1,11 +1,9 @@
+import { RESOLUTION } from '../../utils/constants';
 import './Techs.css';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-export default function Techs() {
-  const { width } = useWindowDimensions();
-
+export default function Techs({ width }) {
   return(
-    <section className={`techs ${width < 768 ? "techs_type_light" : ""}`}>
+    <section className={`techs ${width < RESOLUTION.tablet ? "techs_type_light" : ""}`}>
       <div className="techs__container">
         <h2 className="techs__title">Технологии</h2>
         <h3 className="techs__subtitle">7 технологий</h3>

@@ -36,12 +36,11 @@
   font-size: 11px;
   line-height: 14px;
   font-weight: 500;
-  border-bottom: 1px solid #E8E8E8;
-  padding-bottom: 16px;
+  padding-bottom: 2px;
 }
 
-.profile__label:last-child {
-  padding: 17px 0 0;
+.profile__label:nth-child(4) {
+  padding: 17px 0 2px;
   border: none;
 }
 
@@ -57,6 +56,20 @@
 .profile__input-item:focus {
   outline: none;
   font-weight: 500;
+}
+
+.profile__input-error {
+  width: 100%;
+  min-height: 12px;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF004C;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.profile__input-error:last-child {
+  border-bottom: none;
 }
 
 .profile__btn-container {

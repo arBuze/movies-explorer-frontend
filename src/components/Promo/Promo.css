@@ -56,6 +56,11 @@
   box-sizing: border-box;
   border-radius: 3px;
   padding: 9px 20px;
+  transition: opacity .2s ease-in;
+}
+
+.promo__button:hover {
+  opacity: .8;
 }
 
 @media (min-width: 768px) {

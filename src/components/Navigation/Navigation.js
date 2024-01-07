@@ -1,16 +1,15 @@
 import './Navigation.css';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { RESOLUTION } from '../../utils/constants';
 
-export default function Navigation({ isLoggedIn }) {
+export default function Navigation({ isLoggedIn, width }) {
   const location = useLocation();
-  const { width } = useWindowDimensions();
 
   return(
     <nav className="navigation">
         <ul className="navigation__links">
           {
-            isLoggedIn ? width >= 1024 &&
+            isLoggedIn ? width >= RESOLUTION.laptop &&
             <>
               <li className="navigation__item">
                 <NavLink to="/movies" className={({isActive}) => `navigation__link ${isActive ? "navigation__link_active" : ""}`} >
@@ -36,7 +35,7 @@ export default function Navigation({ isLoggedIn }) {
                 <Link to="/signup" className="navigation__auth-link">Регистрация</Link>
               </li>
               <li className="navigation__auth-item">
-                <Link to="/signup" className="navigation__auth-link">Войти</Link>
+                <Link to="/signin" className="navigation__auth-link">Войти</Link>
               </li>
             </>
           }
